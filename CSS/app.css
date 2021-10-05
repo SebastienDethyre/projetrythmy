@@ -1,0 +1,11 @@
+
+#__drop {
+	width: 99%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	border: 5px dashed rgb(175, 175, 175);    
+	z-index: 11;
+	background-color: rgba(0,0,0,0.4);
+    }
