@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang=fr>
+
+<head>
+    <title>Profil Rythmy</title>
+    <meta name="description" content="Mon profil Rythmy">
+    <meta name="author" content="Sébastien DETHYRE">
+    <meta name="keywords" content="Rythmy, musique, création ">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/PNG" href="img/logo.png" />
+    <link rel="stylesheet" href="CSS/w3.css">
+	<link rel="stylesheet" href="CSS/w3-colors-ios.css">	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="CSS/introjs.min.css">   
+    <link rel="stylesheet" href="CSS/style.css" />
+    <link rel="stylesheet" href="CSS/pitch-shifter.css" />
+    <link rel="stylesheet" href="CSS/jquery-ui.min.css" />
+    <link rel="stylesheet" href="CSS/jquery.ui.slider.min.css" />
+    <link rel="stylesheet" href="CSS/app.css" />
+
+    <!-- <script src="JavaScript/buffer-loader.js"></script>
+    <script src="https://urtzurd.github.io/html-audio/static/js/jquery-1.9.1.min.js"></script>
+    <script src="https://urtzurd.github.io/html-audio/static/js/jquery-ui.min.js"></script> -->
+	<script src="JavaScript/jQuery.js" type="text/javascript" defer></script> 
+    <script src="JavaScript/app.js" type="text/javascript" defer></script>
+    
+    <script src="JavaScript/draggable.min.js" type="text/javascript"  ></script>      
+    <script src="JavaScript/tweenMax.min.js" type="text/javascript"  ></script> 
+    <script src="JavaScript/wavesurfer.min.js" type="text/javascript"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.26/Tone.js.map" type="text/javascript"></script>
+    <script src="JavaScript/tone.js" type="text/javascript"></script> -->
+
+    <!-- wavesurfer.js regions -->
+    <!-- <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.regions.min.js"></script> -->
+    <script src="JavaScript/wavesurfer.regions.min.js" type="text/javascript"></script>
+    <script src="JavaScript/intro.min.js" type="text/javascript"></script> 
+    <script src="JavaScript/actionhelper.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <main>
+        
+        <div id="__drop" class="hidden"></div>
+		<div class="header">
+            <div class="parametres">
+                <a href="parametres.html"><img src="img/parametres.png" alt="Paramètres" width="30" height="30" /></a>
+            </div>
+            <!-- <div class="profil_pic">
+                <img src="img/logo.png" alt="Photo de profil" width="200" height="200" />
+            </div> -->
+            <div style= "display: flex;justify-content: center;">
+                <div id="disclaimer" class="disclaimer">
+                    <h4>
+                        <p>Ceci est un site de démonstration des fonctionnalitées d'ajout de contenu, pour un projet de réseau social musical. Veuillez glisser-déposer un fichier au format mp3 directement sur cette fenêtre, ou utiliser la fonction dédiée : le bouton en forme de "+" au bas de cet écran.</p>
+                             <!-- Vous trouverez ici une vidéo-démonstration des principales fonctionnalités : </p> -->
+
+                        <!-- <a style="color:rgb(122, 99, 255)" href="https://www.youtube.com/watch?v=GMLWWS612lg">Fonctionnalités d'ajout de musique et d'édition de samples</a> -->
+                    </br></br>
+                    <p>Bonne visite !</p>
+                    </h4>
+                </div>
+            </div>
+            <div class="pseudo"> 
+            </div>
+            <div class="compteurs">
+                <div class="abos">
+                    <p>abonnés: 0</p>
+                </div>
+                <div class="posts">
+                    <p>posts: 0</p>
+                </div>
+            </div>
+            <button class="mod_profil">
+                Modifier profil
+            </button>
+        </div>
+        <div class="menu">
+            <a href="index.html">
+                <div class="select">Samples</div>
+            </a>
+            <a href="musiques.html">Musiques</a>
+            <a href="clips.html">Clips</a>
+        </div>        
+        <div class="page">
+        </div>
+		
+        <div class="cpts">
+            <p>Il n'y a rien à voir ici pour l'instant !</p>
+        </div>
+        <div class="scroll_to_top">
+            <a href="#top"><img src="img/top.png" alt="Retourner en haut" /></a>
+        </div>
+
+
+
+
+
+		<div id="overlay" class="overlay"></div>	
+		
+		<div class="formalContainer">
+            <form method="post" id="formalSamples" class="formalSamples" enctype="multipart/form-data">
+               
+                <label class="labelFormal">Ajout d'un Sample</label>
+                <input type="text" class = "titreFormal" name="titreSamples" required
+                minlength="1" maxlength="40" size="40" placeholder=" Titre">
+                <textarea class="textareaFormal " placeholder="&#10;&#10;Description" rows=5.5% cols=39%></textarea>
+                <input type="file" class="inputFile formalStyle" name="sampleFile" placeholder="Fichier de sample à télécharger"
+                accept="audio/*">
+                 <div><button class="buttonFormal formalStyle">Envoyer</button></div>
+                    
+                </form>
+            <form method="post" id="formalMusiques" class="formalMusiques" name="formalMusique" enctype="multipart/form-data">
+                <label class="labelFormal">Ajout d'une musique</label>
+                <input type="textarea" id="titreMusique" class = "titreFormal" name="titreMusique" required
+                minlength="1" maxlength="50" size="50" placeholder=" Titre">
+                <textarea id="textMusique" class="textareaFormal speechttxt" name="textMusique" placeholder="&#10;Description"></textarea>
+                
+                <input type="file" id="inputMusique" name="musiqueFile" placeholder=""
+                accept="audio/*" style="display:none;">
+               
+                <span id="btnInputMusique" class="btnInputMusique"><img id="imgInputMusique" src="img/upload.png" width="100%" height="100%"/></span>
+                
+                <input type="file" id="inputImageMusique" name="imageMusiqueFile" placeholder=""
+                accept="image/*" style="display:none;">
+                <span id="btnInputImageMusique" class="btnInputImageMusique"><img id="imgInputImageMusique" src="img/imageResume.png" width="100%" height="100%"/></span>
+
+                <div id="audioControls" class="audioControls">
+                    <span id="btnPlayPreviewAud" class="btnPlayPreviewAud"><img id="PlayPreviewAud" src="img/prevPlayButtonSelect.png" width="100%" height="100%"/></span>
+                    <span id="btnResetPreviewAud" class="btnResetPreviewAud"><img id="ResetPreviewAud" src="img/prevResetButtonSelect.png" width="100%" height="100%"/></span>
+                    <span id="btnSubmitAud" class="btnSubmitAud"><img id="imgSubmitAud" src="img/submitButton.png" width="100%" height="100%"/></span>
+                    <span id="btnWaveforms" class="btnWaveforms"><img id="imgWaveforms" src="img/waveforms.png" width="100%" height="100%"/></span>
+                    <input type="range" id="volumeControl" class="volumeControl">                    
+                    <span id="btnFlipTuile" class="btnFlipTuile"><img id="imgFlipTuile" src="img/flipTuile.png" width="100%" height="100%"/></span> 
+                    <div class="progress">
+                        <span class="start"></span>
+                        <div class="progress-bar">
+                            <div class="now"></div>
+                        </div>
+                        <span class="end"></span>
+                    </div>                    
+                </div> 
+	        </form>        
+            <div id="wheelContainer">
+                <div id="wheel" src="img/nothing.png" >
+            <div id="wheelInside"></div></div>
+            </div>
+            <div id="wheelContainer2">
+                    <div id="wheel2" class="wheel2" src="img/nothing.png">                        
+                    </div>
+                    <div id="wheelInside2"><img id="imageMusique" class= "imageMusique" src="img/nothing.png"></div>           
+            </div>
+            <form method="post" id="formalClips" class="formalClips" enctype="multipart/form-data">
+                <label class="labelFormal">Ajout d'un clip</label>
+                <input type="text" class = "titreFormal" name="titreClips" required
+                minlength="1" maxlength="60" size="50" placeholder=" Titre">
+                <textarea class="textareaFormal" placeholder="&#10;&#10;Description" rows=5.5% cols=39%></textarea>
+                <input type="file" id="inputClip" class="inputFile formalStyle" name="clipFile" placeholder="Fichier vidéo à télécharger"
+                accept="video/*">
+                 <div><button class="buttonFormal formalStyle">Envoyer</button></div>
+	        </form>
+            <div>
+                <video width="400" id="previewVid" class= "previewVid" height="222" controls="controls">
+                    <source id="video"  src=""
+                    type="video/*">
+                 </video>
+            </div>    
+            <div id="tuileMusique" class="tuileMusique">
+                <img id="imageResumeMusique" class="imageResumeMusique" src="img/nothing.png">
+                <div id="resumeMusique" class="resumeMusique"></div>                
+            </div>
+            <div id="pannelMusique" class="pannelMusique">
+                <div class="audioSpeedContainer">
+                <input type="range" id="audioSpeed" class="audioSpeed sliderVertical">
+                <output class="audioSpeedOutput"></output></div>
+                <div class="audioDistortionContainer">
+                <input type="range" id="audioDistortion" class="audioDistortion sliderVertical">
+                <output class="audioDistortionOutput"></output></div>                 
+                <div class="audioPitchContainer">
+                <input type="range" id="audioPitch" class="audioPitch sliderVertical">
+                <output class="audioPitchOutput"></output></div>                 
+                <span id="btnCut" class="btnCut"><img id="imgCut" src="img/btnCut.png" width="100%" height="100%"/></span>
+                <!-- <span id="btnPitch" class="btnPitch"><img id="imgPitch" src="img/btnCut.png" width="100%" height="100%"/></span> -->
+                <span id="btnRecord" class="btnRecord"><img id="imgRecord" src="img/record.png" width="100%" height="100%"/></span>
+                <span id="btnScreenCapture" class="btnScreenCapture"><img id="imgScreenCapture" src="img/screenCapture.png" width="100%" height="100%"/></span>
+                <span id="btnStop" class="btnStop"><img id="imgStop" src="img/stopRecord.png" width="100%" height="100%"/></span>            
+                <video id = "miniScreen" width="320" height="240" autoplay></video><br>
+                <button id="shareScreen" style= "display:none">Capture Screen</button>               
+                <a id="downloadLink" download="mediarecorder.webm" name="mediarecorder.webm" href></a>
+                <div id="error"></div>  
+                <span id="btnDiskSkin" class="btnDiskSkin"><img id="imgDiskSkin" src="img/diskSkin.png" width="100%" height="100%"/></span>  
+            </div>
+            <div id="overlayCut" class="overlayCut">
+                <div class="w3-container">                    
+                    <br>
+                    <div id="waveformCut" class="waveformCut" 
+                        data-step="3" data-intro="Click and drag to select section">	
+                    </div>                    
+                    <br>
+                    <div class="sampleRows">
+                        <div class="w3-half w3-container w3-hide" id="sampleButtons">
+                            <button class="w3-button w3-border w3-border-deep-purple w3-round-xlarge" onClick="playAndPause()">
+                                <i id="playPauseCut" class="fa fa-play"></i>
+                            </button>              
+                            <b id="timeCurrent">0:00</b> / <b id="timeTotal">0:00</b>
+                        </div>                      
+                        <div class="w3-half w3-container">
+                            <span id="btnWaveStyle" class="btnWaveStyle"><img id="imgBtnWaveStyle" src="img/waveCutSignal.png" width="100%" height="100%"/></span>
+                            <span id="btnBarStyle" class="btnBarStyle"><img id="imgBtnBarStyle" src="img/waveCutBars.png" width="100%" height="100%"/></span>
+                            <input id="sampleFile" type="file" onChange="loadAudio()"
+                            data-step="2" data-intro="Select a MP3 File">
+                        </div>                      
+                    </div>
+                    <hr>
+                    <div data-step="4" data-intro="Would you like to know how to merge tracks. Click Next.">
+                        <table class="cutListContainer w3-table-all w3-card-4" id="audio-tracks" 
+                            data-step="5" data-intro="Select atleast 2 checkboxes for merging. Click Next.">
+                            <thead>
+                                <tr class="w3-border w3-border-deep-purple w3-text-deep-purple">
+                                    <th></th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>              
+                            <tbody style='overflow:auto'></tbody>
+                            <tfoot ></tfoot>
+                        </table>
+                        <span id="btnCutOut" class="btnCutOut"><img id="imgRecord" src="img/back.png" width="100%" height="100%"/></span>
+                    </div>
+                    <br>                        
+                    <div id="merge-option" class="w3-hide">
+                        <button class="w3-button w3-border w3-border-deep-purple w3-round-xlarge" onClick="mergeTrack()" data-step="6" data-intro="Click to merge selected tracks. Bye bye!! :)">
+                            <i>Merge tracks</i>
+                        </button>	 
+                        <br><br>
+                        <div class="w3-row w3-hide" id="merged-track-div">
+                            <b class="w3-col l1 w3-text-olive"><i>Merged Audio : </i></b>	
+                            <audio controls="controls" class="w3-col l11" id="merged-track">
+                                <source src="" type="">
+                            </audio>
+                        </div>
+                    </div>                        
+                </div>
+            </div>
+            <div id="sampleBox" class="sampleBox"></div>
+
+            <!-- <div id="pitchBox" class="pitchBox">
+                <div class="sliderContainer">
+                    <div class="sliderLabel">Pitch ratio</div>
+                    <div id="pitchRatioSlider"></div>
+                    <div id="pitchRatioDisplay" class="sliderDisplay"></div>
+                </div>
+        
+                <div class="sliderContainer">
+                    <div class="sliderLabel">Overlap ratio</div>
+                    <div id="overlapRatioSlider"></div>
+                    <div id="overlapRatioDisplay" class="sliderDisplay"></div>
+                </div>
+        
+                <div class="sliderContainer">
+                    <div class="sliderLabel">Grain size</div>
+                    <div id="grainSizeSlider"></div>
+                    <div id="grainSizeDisplay" class="sliderDisplay"></div>
+                </div>
+        
+                <div class="sliderContainer">
+                    <div class="sliderLabel">Visualisation</div>
+                    <div id="audioVisualisationSlider"></div>
+                    <div id="audioVisualisationDisplay" class="sliderDisplay"></div>
+                </div>
+        
+                <div class="sliderContainer">
+                    <div class="sliderLabel">Audio source</div>
+                    <div id="audioSourceSlider"></div>
+                    <div id="audioSourceDisplay" class="sliderDisplay"></div>
+                </div>
+        
+                <canvas width="512px" height="240px"></canvas>
+        
+                <p>This page needs a <a href="http://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html">Web Audio API</a> enabled browser. 
+                Here is an updated list with browser support: <a href="http://caniuse.com/#feat=audio-api">Can I use</a>.</p>
+                <p>
+                    In order to use the microphone, you may have to enable a configuration flag:
+                    <ul>
+                        <li>Go to <em>chrome://flags</em></li>
+                        <li>Enable the Web Audio Input option</li>
+                        <li>Restart the browser</li>
+                    </ul>
+                </p>
+        
+                <div class="warningContainer">
+                    <strong>Use the microphone with headphones or you may get a lot of feedback!</strong>
+                </div>
+            </div>  -->
+
+		</div>
+		<div class="popupContainer">
+			<div id="popup" class="popup">	
+				<div>
+					<span id="btnSamples" class="btnSamples btnControls"><img id="imgSamples" src="img/samples.png" width="100%" height="100%"/></span>
+                    <span id="btnMusiques" class="btnMusiques btnControls"><img id="imgMusiques" src="img/musiques.png" width="100%" height="100%"/></span>
+                   	<span id="btnClips" class="btnClips btnControls"><img id="imgClips" src="img/clips.png" width="100%" height="100%"/></span>
+				</div>
+				<div class="CloseBtn">
+					<span id="btnClose" class="btnClose">	
+						&times;
+					</span>
+				</div>	
+			</div>
+		</div>
+		<footer>
+            <div class="foot">
+                <a href="#"><img src="img/ac.png" alt="Accueil" width="30" height="30"/></a>
+                <a href="#"><img src="img/trend.png" width="30" height="30"/></a>
+                <span id="btnPopup" class="btnPopup"><img id="imgAj" src="img/aj.png" alt="Nouveau" width="30" height="30"/></span>
+                <a href="#"><img src="img/play.png" alt="Playlist" width="30" height="30"/></a>
+                <a href="/"><div class="profilS"><div class="select"><img src="img/logo.png" alt="Profil" width="30" height="30"/></div></div></a>
+            </div>
+        </footer>
+    </main>
+</body>
